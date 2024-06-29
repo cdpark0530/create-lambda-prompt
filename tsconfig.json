@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		/* Resolutions */
+		"target": "ESNext",
+		"moduleResolution": "bundler",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["src/*"],
+			"@/package.json": ["package.json"]
+		},
+
+		/* Generations */
+		"module": "ESNext",
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"useDefineForClassFields": true,
+		"incremental": false,
+		"rootDir": "src",
+		"outDir": "dist",
+
+		/* Linting */
+		"strict": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"forceConsistentCasingInFileNames": true,
+		"experimentalDecorators": true
+	},
+	"include": ["src/**/*.ts", "src/**/*.tsx"],
+	"exclude": ["node_modules", "dist"]
+}

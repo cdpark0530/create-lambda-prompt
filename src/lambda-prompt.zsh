@@ -1,11 +1,3 @@
-# λ Pure
-# by Michał Nykiel
-# https://github.com/marszall87/lambda-pure
-# MIT License
-#
-# based on Pure by Sindre Sorhus
-# https://github.com/sindresorhus/pure
-
 # For my own and others sanity
 # git:
 # %b => current branch

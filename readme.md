@@ -1,83 +1,58 @@
-# λ Pure
+Continue maintaining and publishing [Michał Nykiel](https://github.com/marszall87)'s [lambda-pure](https://github.com/marszall87/lambda-pure) on npm.
 
-> Pretty, minimal and fast ZSH prompt based on Pure
+<img src="preview.png" width="864">
 
-<img src="screenshot.png" width="864">
+## Installation
 
+Requires git 2.0.0+ and ZSH 5.0.0+.
 
-## Overview
-
-Most prompts are cluttered, ugly and slow. I wanted something visually pleasing that stayed out of my way.
-
-### Why?
-
-- Comes with the `λ` prompt character. Because lambdas are cool.
-- Shows `git` branch and whether it's dirty (with a `×`).
-- Indicates when you have unpushed/unpulled `git` commits with up/down triangles. *(Check is done asynchronously!)*
-- Shows current NodeJS version on the right side. *(Check is done asynchronously!)*
-- Prompt character turns red if the last command didn't exit with `0`.
-- Command execution time will be displayed if it exceeds the set threshold.
-- Username and host only displayed when in an SSH session.
-- Shows the current path in the title and the [current folder & command](screenshot-title-cmd.png) when a process is running.
-
-## Install
-
-Can be installed with `npm` or manually. Requires git 2.0.0+ and ZSH 5.0.0+.
-
-### npm
+### Automatic method
 
 ```console
-$ npm install --global lambda-pure-prompt
+$ npm install --global create-lambda-prompt
+$ sudo create-lambda-prompt
 ```
 
-That's it. Skip to [Getting started](#getting-started).
+<img src="installation.gif" width="864">
 
-### Manually
+### Manual method
 
-1. Either…
-  - Clone this repo
-  - add it as a submodule, or
-  - just download `lambda-pure.zsh` and `async.zsh`
-
-2. Symlink `lambda-pure.zsh` to somewhere in [`$fpath`](https://www.refining-linux.org/archives/46-ZSH-Gem-12-Autoloading-functions.html) with the name `prompt_lambda-pure_setup`.
-
-3. Symlink `async.zsh` in `$fpath` with the name `async`.
-
-#### Example
-
-```console
-$ ln -s "$PWD/lambda-pure.zsh" /usr/local/share/zsh/site-functions/prompt_lambda-pure_setup
-$ ln -s "$PWD/async.zsh" /usr/local/share/zsh/site-functions/async
-```
-*Run `echo $fpath` to see possible locations.*
-
-For a user-specific installation (which would not require escalated privileges), simply add a directory to `$fpath` for that user:
+1. Copy [src/lambda-prompt.zsh](src/lambda-prompt.zsh) and [src/async.zsh](src/async.zsh) to `/usr/local/share/zsh/site-functions/`.
+2. Put the following launch snippet at the end of `~/.zshrc`.
 
 ```sh
-# .zshenv or .zshrc
-fpath=( "$HOME/.zfunctions" $fpath )
+#...
+
+autoload -U promptinit
+promptinit
+prompt lambda-prompt
 ```
 
-Then install the theme there:
+### Manual integration
 
-```console
-$ ln -s "$PWD/lambda-pure.zsh" "$HOME/.zfunctions/prompt_lambda-pure_setup"
-$ ln -s "$PWD/async.zsh" "$HOME/.zfunctions/async"
-```
+#### [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
-
-## Getting started
-
-Initialize the prompt system (if not so already) and choose `lambda-pure`:
+1. Copy [src/lambda-prompt.zsh](src/lambda-prompt.zsh) to `~/.oh-my-zsh/custom/themes/lambda-prompt.zsh-theme`.
+2. Put `ZSH_THEME="lambda-prompt"` config into `~/.zshrc` like below.
 
 ```sh
-# .zshrc
-autoload -U promptinit; promptinit
-prompt lambda-pure
-```
+ZSH_THEME="lambda-prompt" # comes before sourcing oh-my-zsh.sh
 
+source $ZSH/oh-my-zsh.sh # comes before the launch snippet
+
+autoload -U promptinit
+#...
+```
 
 ## Options
+
+```sh
+#...
+PURE_NODE_ENABLED=0 # comes before lambda prompt's launch snippet
+
+autoload -U promptinit
+#...
+```
 
 ### `PURE_CMD_MAX_EXEC_TIME`
 
@@ -114,55 +89,3 @@ Defines the git dirty symbol. The default value is `×`.
 ### `PURE_NODE_ENABLED`
 
 Set `PURE_NODE_ENABLED=0` to not display the NodeJS version.
-
-## Example
-
-```sh
-# .zshrc
-
-autoload -U promptinit; promptinit
-
-# optionally define some options
-PURE_CMD_MAX_EXEC_TIME=10
-
-prompt lambda-pure
-```
-
-## Integration
-
-### [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-
-1. Symlink (or copy) `lambda-pure.zsh` to `~/.oh-my-zsh/custom/themes/lambda-pure.zsh-theme`.
-2. Set `ZSH_THEME="lambda-pure"` in your `.zshrc` file.
-
-### [antigen](https://github.com/zsh-users/antigen)
-
-Update your `.zshrc` file with the following two lines (order matters). Do not use the `antigen theme` function.
-
-```console
-$ antigen bundle mafredri/zsh-async
-$ antigen bundle marszall87/lambda-pure
-```
-
-### [antibody](https://github.com/getantibody/antibody)
-
-Update your `.zshrc` file with the following two lines (order matters):
-
-```console
-$ antibody bundle mafredri/zsh-async
-$ antibody bundle marszall87/lambda-pure
-```
-
-### [zgen](https://github.com/tarjoilija/zgen)
-
-Update your `.zshrc` file with the following two lines (order matters):
-
-```console
-$ zgen load mafredri/zsh-async
-$ zgen load marszall87/lambda-pure
-```
-
-## License
-
-MIT © [Michał Nykiel](https://github.com/marszall87)
-based on [Pure by Sindre Sorhus](https://github.com/sindresorhus/pure)

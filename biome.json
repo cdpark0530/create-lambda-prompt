@@ -1,0 +1,44 @@
+{
+	"$schema": "node_modules/@biomejs/biome/configuration_schema.json",
+	"files": {
+		"ignore": ["dist", "node_modules"]
+	},
+	"linter": {
+		"rules": {
+			"correctness": {
+				"noUnusedVariables": {
+					"level": "error"
+				},
+				"noUnusedImports": {
+					"level": "error"
+				},
+				"useExhaustiveDependencies": {
+					"level": "warn"
+				}
+			},
+			"nursery": {
+				"noUnusedFunctionParameters": {
+					"level": "error"
+				}
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noGlobalIsNan": "warn"
+			},
+			"complexity": {
+				"noForEach": "off"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"include": [".vscode"],
+			"json": {
+				"parser": {
+					"allowComments": true,
+					"allowTrailingCommas": true
+				}
+			}
+		}
+	]
+}

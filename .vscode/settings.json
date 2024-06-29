@@ -1,0 +1,8 @@
+{
+	"editor.defaultFormatter": "biomejs.biome",
+	"biome.enabled": true,
+	"biome.lspBin": "node_modules/@biomejs/biome/bin/biome",
+	"[ignore]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
+	}
+}
