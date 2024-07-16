@@ -30,10 +30,10 @@ const useUpdateMessage = () => {
 	return useMemo(
 		() =>
 			packageManager === "yarn"
-				? "yarn global add create-next-app"
+				? `yarn global add ${packageJson.name}`
 				: packageManager === "pnpm"
-					? "pnpm add -g create-next-app"
-					: "npm i -g create-next-app",
+					? `pnpm add -g ${packageJson.name}`
+					: `npm i -g ${packageJson.name}`,
 		[packageManager],
 	);
 };
